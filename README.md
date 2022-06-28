@@ -22,30 +22,32 @@ With this configuration in place you should now be ready to run the application.
 
 Verify that the application runs and exits normally (Gradle will report this as a "successful build").  Once you've verified a clean run you can check to make sure you have data in your DataStax Astra database.  If you're using the data defined in the sample app you should see something very much like the following:
 
-> token@cqlsh> select * from example.wordcount ;
-> 
->  word   | count
-> --------+-------
->    dogs |     1
->  lazier |     1
->   least |     1
->   foxes |     1
->  jumped |     1
->      at |     1
->     are |     1
->    just |     1
->   quick |     1
->    than |     1
->     fox |     1
->     our |     1
->     dog |     2
->      or |     1
->    over |     1
->   brown |     1
->    lazy |     1
->     the |     2
-> 
-> (18 rows)
+```
+token@cqlshselect * from example.wordcount ;
+
+ word   | count
+--------+-------
+   dogs |     1
+ lazier |     1
+  least |     1
+  foxes |     1
+ jumped |     1
+     at |     1
+    are |     1
+   just |     1
+  quick |     1
+   than |     1
+    fox |     1
+    our |     1
+    dog |     2
+     or |     1
+   over |     1
+  brown |     1
+   lazy |     1
+    the |     2
+
+(18 rows)
+```
 
 [1] You can actually place this file anywhere on the classpath since we use ClassLoader's getResourceAsStream() method to find it.  app/src/main/resources is simply the most convenient place to do so.
 
