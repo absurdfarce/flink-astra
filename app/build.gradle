@@ -1,0 +1,35 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+    // We need a version of Flink which includes https://github.com/apache/flink/commit/15f18dba2b2cd82c14c5dbdb617641119fd5bfcd.
+    // This commit upgrades the DataStax Java driver used by Flink's Cassandra sink to 3.11.2, a version which includes support for
+    // DataStax Astra.  There is no official release which includes this commit so we use the snapshot repo in order
+    // to grab a snapshot of the 1.16 release.
+    maven { url "https://repository.apache.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+    implementation 'org.apache.flink:flink-streaming-java:1.16-SNAPSHOT'
+    implementation 'org.apache.flink:flink-clients:1.16-SNAPSHOT'
+    implementation 'org.apache.flink:flink-streaming-scala_2.12:1.16-SNAPSHOT'
+    implementation 'org.apache.flink:flink-connector-cassandra_2.12:1.16-SNAPSHOT'
+
+    implementation 'org.slf4j:slf4j-log4j12:1.7.32'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.14.1'
+
+    // The commit referenced above excludes jackson-databind from the dependencies of the DataStax Java driver in order
+    // to avoid interfering with the usage of jackson-databind classes elsewhere within Flink.  The DataStax Java driver
+    // uses jackson-databind only in it's Astra connection code so in general this exclusion makes sense.  We wish to
+    // leverage this code, however, so we have to explicitly re-introduce it here.
+    //
+    // The version of jackson-databind specified here is the same one used in version 3.11.2 of the DataStax Java
+    // driver.
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.7.9.7'
+}
+
+application {
+    mainClass = 'com.datastax.flink.astra.App'
+}
