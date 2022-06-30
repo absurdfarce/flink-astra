@@ -12,7 +12,7 @@ The code requires a running database on DataStax Astra.  Once you have such a da
 * Create a keyspace named "example" in your Astra database.  At the moment this name is hard-coded.
 * Download the secure connect bundle (SCB) for your database and place it in app/src/main/resources [1]
 * Create a properties file at app/src/main/resources/app.properties.
-* Add properties specifying your Astra username, password and SCB file name.  These should map to the "astra.username", "astra.password" and "astra.scb" properties respectively.
+* Add properties specifying your Astra username, password and SCB file name.  These should map to the "astra.clientid", "astra.secret" and "astra.scb" properties respectively.
 
 Note that most of the configuration specified above is driven by the sample app; it's not required by the general method described here.  You're free to implement alternate methods for loading Astra username/password information and/or your SCB.
 

@@ -20,8 +20,8 @@ public class App {
     private static final Logger log = LoggerFactory.getLogger(App.class);
 
     private static final String ASTRA_SCB = "astra.scb";
-    private static final String ASTRA_USER = "astra.username";
-    private static final String ASTRA_PASS = "astra.password";
+    private static final String ASTRA_CLIENTID = "astra.clientid";
+    private static final String ASTRA_SECRET = "astra.secret";
 
     private static Cluster buildCluster(Cluster.Builder builder, Properties props) {
 
@@ -29,8 +29,8 @@ public class App {
                 .withCloudSecureConnectBundle(ClassLoader.getSystemClassLoader().getResourceAsStream(props.getProperty(ASTRA_SCB)))
                 .withAuthProvider(
                         new PlainTextAuthProvider(
-                                props.getProperty(ASTRA_USER),
-                                props.getProperty(ASTRA_PASS)))
+                                props.getProperty(ASTRA_CLIENTID),
+                                props.getProperty(ASTRA_SECRET)))
                 .build();
     }
 
