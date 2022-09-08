@@ -23,7 +23,7 @@ With this configuration in place you should now be ready to run the application.
 Verify that the application runs and exits normally (Gradle will report this as a "successful build").  Once you've verified a clean run you can check to make sure you have data in your DataStax Astra database.  If you're using the data defined in the sample app you should see something very much like the following:
 
 ```
-token@cqlshselect * from example.wordcount ;
+token@cqlsh: select * from example.wordcount ;
 
  word   | count
 --------+-------
